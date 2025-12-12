@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -10,9 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         >
 
+        <!-- Top App Bar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBarLibrary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:titleTextColor="@android:color/white"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp" >
         <ImageView
             android:id="@+id/imgCover"
             android:layout_width="match_parent"
@@ -126,35 +140,64 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRead"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Đọc từ đầu" />
-
-            <Button
+                android:text="Đọc từ đầu"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:iconGravity="textStart"
+                android:backgroundTint="#7B1FA2"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:elevation="2dp"
+                tools:ignore="MissingConstraints" />
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFavorite"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="❤️ Thích" />
+                android:text="❤️ Thích"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:iconGravity="textStart"
+                android:backgroundTint="#7B1FA2"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:layout_marginLeft="10dp"
+                android:elevation="2dp"
+                tools:ignore="MissingConstraints" />
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnToggleChapters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="☰ Hiện danh sách chương"
-            android:layout_marginTop="16dp"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:textColor="@android:color/white" />
+            android:elevation="2dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:text="☰ Hiện danh sách chương"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            app:iconGravity="textStart"
+            tools:ignore="MissingConstraints" />
+
         <LinearLayout
             android:id="@+id/layoutChapters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
 
         <View
             android:layout_width="match_parent"
@@ -163,15 +206,68 @@
             android:layout_marginBottom="8dp"
             android:background="#CCCCCC" />
 
+        <LinearLayout
+            android:id="@+id/layoutRatingSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
 
+            <TextView
+                android:id="@+id/tvAverage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.6"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:textColor="#4A148C"
+                tools:text="4.6" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    tools:rating="4.6" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(1,234 đánh giá)"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWriteReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Viết đánh giá"
+            android:textAllCaps="false"
+            app:cornerRadius="8dp"
+            android:backgroundTint="#7B1FA2"
+            android:textColor="@android:color/white" />
         <!-- Phần bình luận -->
         <LinearLayout
+            android:id="@+id/layoutComments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="16dp"
             android:padding="12dp"
-            android:background="@drawable/bg_comment_section">
+            android:background="@drawable/bg_comment_section"
+            android:visibility="gone"
+            >
 
             <TextView
                 android:id="@+id/tvCommentsLabel"
@@ -196,78 +292,80 @@
                 android:layout_marginTop="8dp"
                 android:visibility="gone"/>
 
+        </LinearLayout>
+        <!-- FORM ĐÁNH GIÁ (ẩn lúc đầu) -->
+        <LinearLayout
+            android:id="@+id/layoutWriteReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="@drawable/bg_comment_section"
+            android:visibility="gone">
+
+            <!-- Thanh đánh giá sao -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp"
-                android:background="@drawable/bg_comment_input"
+                android:paddingTop="0dp"
+                android:paddingBottom="4dp">
+
+                <RatingBar
+                    android:id="@+id/ratingBarInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="1.0"
+                    android:rating="5"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
+                    android:layout_gravity="start" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#CCCCCC"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <!-- Ô nhập và nút gửi -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp">
 
-                <!-- Thanh đánh giá sao -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/edtComment"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="0dp"
-                    android:paddingBottom="4dp"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="0dp">
+                    android:hint="Viết bình luận..."
+                    android:background="@android:color/transparent"
+                    android:padding="8dp" />
 
-                    <RatingBar
-                        android:id="@+id/ratingBarInput"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:numStars="5"
-                        android:stepSize="1.0"
-                        android:rating="5"
-                        android:scaleX="0.8"
-                        android:scaleY="0.8"
-                        android:layout_gravity="start" />
-
-                    <!-- Đường kẻ dưới hàng sao -->
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#CCCCCC"
-                        android:layout_marginTop="4dp"/>
-                </LinearLayout>
-
-                <!-- Ô nhập và nút gửi -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSubmitComment"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
-
-                    <EditText
-                        android:id="@+id/edtComment"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:hint="Viết bình luận..."
-                        android:background="@android:color/transparent"
-                        android:padding="8dp" />
-
-                    <Button
-                        android:id="@+id/btnSubmitComment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Gửi"
-                        android:layout_marginStart="8dp" />
-                </LinearLayout>
+                    android:text="Gửi"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    app:cornerRadius="8dp"
+                    android:backgroundTint="#7B1FA2"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="10dp"
+                    android:elevation="2dp" />
             </LinearLayout>
+
         </LinearLayout>
 
 
-        <!-- Nút quay lại -->
-        <Button
-            android:id="@+id/btnBackToHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quay lại"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"/>
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </androidx.core.widget.NestedScrollView>

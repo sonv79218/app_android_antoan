@@ -1,15 +1,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+
     android:fitsSystemWindows="true">
 
-    <Button
+
+    <!-- Top App Bar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:titleTextColor="@android:color/white"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm thể loại" />
+        android:text="Thêm thể loại"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:cornerRadius="8dp"
+        app:iconGravity="textStart"
+        android:backgroundTint="#7B1FA2"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+
+        android:elevation="2dp"
+        tools:ignore="MissingConstraints" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCategories"
@@ -17,11 +47,5 @@
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
         android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Quay lại"
-        android:layout_marginTop="12dp"/>
+    </LinearLayout>
 </LinearLayout>

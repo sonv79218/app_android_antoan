@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
 
     <!-- Top App Bar -->
@@ -16,59 +16,69 @@
         app:menu="@menu/menu_home"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:title="Trang chủ"/>
 
     <!-- Thanh thể loại dạng scroll ngang -->
     <HorizontalScrollView
         android:id="@+id/horizontalCategoryScroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#F5F5F5"
+        android:background="#F8F8F8"
         android:scrollbars="none"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="4dp"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible">
 
         <LinearLayout
             android:id="@+id/categoryTabs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp"/>
+            android:gravity="center_vertical"
+            android:paddingHorizontal="4dp" />
     </HorizontalScrollView>
 
 
+
     <!-- Nội dung cuộn -->
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
-        android:clipToPadding="false"
-        android:paddingBottom="300dp"
         android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/horizontalCategoryScroll"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="300dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/horizontalCategoryScroll"
+        app:layout_constraintVertical_bias="0.0"
+        >
 
 
-
-    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
             android:clipChildren="false"
-            android:descendantFocusability="blocksDescendants">
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical"
+            >
 
 
-        <!-- Danh sách thể loại -->
+            <!-- Danh sách thể loại -->
             <LinearLayout
                 android:id="@+id/layoutCategories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -76,13 +86,14 @@
         android:id="@+id/recyclerSearchResults"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
         android:background="@android:color/white"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_book_card"
+        tools:visibility="visible" />
 
     <!-- Bottom Navigation cố định -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -136,21 +136,30 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <!-- Nút Login -->
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@drawable/btn_login"
             android:text="Đăng nhập"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutForgotNew"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutForgotNew" />
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            app:iconGravity="textStart"
+            android:backgroundTint="#7B1FA2"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:layout_marginLeft="10dp"
+            android:elevation="2dp"
+            tools:ignore="MissingConstraints" />
 
         <!-- Dòng chữ "OR" -->
         <TextView

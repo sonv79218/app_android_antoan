@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="24dp"
     android:background="@android:color/white">
 
@@ -121,25 +122,40 @@
             android:gravity="end"
             android:weightSum="2">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBack"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Quay lại"
-                android:backgroundTint="#7E57C2"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:layout_marginEnd="8dp"/>
-
-            <Button
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:iconGravity="textStart"
+                android:backgroundTint="#7B1FA2"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:elevation="2dp"
+                tools:ignore="MissingConstraints" />
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Lưu thay đổi"
-                android:backgroundTint="#7E57C2"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:layout_marginStart="8dp"/>
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:iconGravity="textStart"
+                android:backgroundTint="#7B1FA2"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp"
+                android:layout_marginLeft="12dp"
+                android:elevation="2dp"
+                tools:ignore="MissingConstraints" />
+
         </LinearLayout>
 
     </LinearLayout>

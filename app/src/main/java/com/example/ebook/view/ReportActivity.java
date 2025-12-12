@@ -30,6 +30,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,8 +107,9 @@ public class ReportActivity extends AppCompatActivity {
 
         loadBooksByCategory(token);
 
-        Button btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> finish()); // Kết thúc activity để quay lại
+        MaterialToolbar toolbar = findViewById(R.id.btnBack);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
     }
 
     private void loadBooksByCategory(String token) {

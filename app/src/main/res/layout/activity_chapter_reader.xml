@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
@@ -13,20 +15,42 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:background="#EEEEEE">
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="🔙 Trở lại" />
+            android:text="🔙 Trở lại"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            app:iconGravity="textStart"
+            android:backgroundTint="#7B1FA2"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:elevation="2dp"
+            tools:ignore="MissingConstraints" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMenu"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="📑 Mục lục" />
+            android:text="📑 Mục lục"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            app:iconGravity="textStart"
+            android:backgroundTint="#7B1FA2"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:layout_marginLeft="10dp"
+            android:elevation="2dp"
+            tools:ignore="MissingConstraints" />
+
+
     </LinearLayout>
 
     <!-- 📖 Nội dung chương -->
@@ -54,19 +78,40 @@
         android:gravity="center"
         android:background="#EEEEEE">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPrevious"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="◀ Chương trước" />
+            android:text="◀ Chương trước"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            app:iconGravity="textStart"
+            android:backgroundTint="#7B1FA2"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:elevation="2dp"
+            tools:ignore="MissingConstraints" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNext"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Chương sau ▶" />
+            android:text="Chương sau ▶"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:cornerRadius="8dp"
+            app:iconGravity="textStart"
+            android:backgroundTint="#7B1FA2"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:layout_marginLeft="10dp"
+            android:elevation="2dp"
+            tools:ignore="MissingConstraints" />
     </LinearLayout>
 
 </LinearLayout>

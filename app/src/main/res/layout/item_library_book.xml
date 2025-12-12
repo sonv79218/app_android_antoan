@@ -1,28 +1,38 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="14dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#EEEEEE">
 
-    <!-- Nội dung chính của item -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:padding="12dp"
         android:gravity="center_vertical">
 
+        <!-- Ảnh bìa -->
         <ImageView
             android:id="@+id/imgCover"
-            android:layout_width="80dp"
-            android:layout_height="100dp"
+            android:layout_width="86dp"
+            android:layout_height="108dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/placeholder"
+            android:background="@drawable/rounded_image_bg"
+            android:clipToOutline="true" />
 
+        <!-- Thông tin -->
         <LinearLayout
             android:orientation="vertical"
             android:layout_marginStart="12dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content">
 
             <!-- Tên sách -->
@@ -31,56 +41,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tên sách"
-                android:textColor="#2E7D32"
+                android:textColor="#1A1A1A"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:shadowColor="#55000000"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="1.5" />
+                android:maxLines="2"
+                android:ellipsize="end" />
 
             <!-- Tác giả -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/ic_person"
-                    android:contentDescription="Tác giả"
-                    app:tint="#666666"
-                    android:layout_marginEnd="4dp"/>
+                    app:tint="#777777"
+                    android:layout_marginEnd="6dp"/>
 
                 <TextView
                     android:id="@+id/tvAuthor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tác giả"
+                    android:text="Tên tác giả"
                     android:textSize="14sp"
-                    android:textStyle="italic"
-                    android:textColor="#444444"/>
+                    android:textColor="#555555"/>
             </LinearLayout>
 
-            <!-- Nút hủy đánh dấu -->
-            <Button
+            <!-- Nút thao tác -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRemoveBookmark"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
                 android:text="Bỏ đánh dấu"
-                android:layout_marginTop="8dp"
-                android:textColor="@android:color/holo_red_dark"
-                android:background="?android:attr/selectableItemBackground" />
-
+                android:textSize="13sp"
+                android:textColor="#D32F2F"
+                android:backgroundTint="#FFF1F1"
+                app:cornerRadius="50dp"
+                app:icon="@drawable/ic_remove_bookmark"
+                app:iconPadding="8dp"
+                app:iconGravity="textStart"
+                app:iconTint="#D32F2F" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Đường kẻ chân dưới -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CCCCCC" />
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,80 +1,134 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:layout_marginBottom="8dp"
-    android:background="@drawable/bg_comment_box"> <!-- gắn viền -->
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:id="@+id/tvCommentUser"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:text="Tên người dùng" />
-
-        <ImageView
-            android:id="@+id/btnMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_more_vert"
-            android:contentDescription="More actions"/>
-    </LinearLayout>
+    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="12dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#F0E6F6">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="start"
-        android:paddingTop="0dp"
-        android:paddingBottom="2dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="0dp">
+        android:padding="12dp">
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:stepSize="1"
-            android:isIndicator="true"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginStart="0dp"/>
-
-        <!-- Gạch dưới -->
-        <View
+        <!-- Header: avatar + name + rating + date -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CCCCCC"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_person"
+                android:layout_marginEnd="12dp"
+                android:backgroundTint="#EDE7F6"
+                android:clipToOutline="true"
+                android:padding="2dp"
+                android:layout_marginRight="12dp"
+                android:importantForAccessibility="yes" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvCommentUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="#2E1A32"
+                    android:fontFamily="sans-serif-medium"
+                    tools:text="Nguyễn A" />
+
+
+                <TextView
+                    android:id="@+id/tvCommentTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:textColor="#7A6A7A"
+                    tools:text="12 Thg 3, 2025" />
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="0.5"
+                tools:rating="4.5" />
+            <ImageView
+                android:id="@+id/btnMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_more_vert"
+                android:contentDescription="More actions"/>
+        </LinearLayout>
+
+        <!-- Nội dung review -->
+        <TextView
+            android:id="@+id/tvCommentContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="#333333"
+            android:maxLines="6"
+            android:ellipsize="end"
+            tools:text="Nội dung review mẫu: sách rất hay, cốt truyện hấp dẫn, nhân vật có chiều sâu..." />
+
+
+        <!-- Actions: Helpful, Reply, More -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="start|center_vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHelpful"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hữu ích 💗"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                app:iconGravity="textStart"
+                android:backgroundTint="@android:color/holo_purple"
+                app:strokeColor="#EFFFFF"
+                app:strokeWidth="1dp"
+                app:cornerRadius="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="• 12" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Trả lời"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:backgroundTint="@android:color/holo_purple"
+                app:cornerRadius="6dp"/>
+        </LinearLayout>
     </LinearLayout>
-
-
-
-    <TextView
-        android:id="@+id/tvCommentContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nội dung bình luận"
-        android:textSize="17sp" />
-
-
-    <TextView
-        android:id="@+id/tvCommentTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thời gian"
-        android:textSize="12sp"
-        android:textColor="#888888" />
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

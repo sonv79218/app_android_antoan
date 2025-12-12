@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.ebook.api.ApiService;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 import java.util.Map;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,7 +56,6 @@ public class BookDetailActivity extends AppCompatActivity {
     private TextView tvTitle, tvAuthor, tvViews, tvDescription, tvExpandDescription, tvExpandChapters;
     private LinearLayout layoutChapters;
     private Button btnRead, btnFavorite;
-    private Button btnBackToHome;
     private boolean isFavorite = false;
     private String bookId;
     private Book book;
@@ -74,6 +74,9 @@ public class BookDetailActivity extends AppCompatActivity {
     private List<Map<String, Object>> allChapters = new ArrayList<>();
     private RatingBar ratingBarInput;
 
+    private LinearLayout layoutRatingSummary;
+
+
 
 
     @Override
@@ -87,12 +90,40 @@ public class BookDetailActivity extends AppCompatActivity {
         tvViews = findViewById(R.id.tvViews);
         tvDescription = findViewById(R.id.tvDescription);
         tvExpandDescription = findViewById(R.id.tvExpandDescription);
-        //tvExpandChapters = findViewById(R.id.tvExpandChapters);
+//        tvExpandChapters = findViewById(R.id.tvExpandChapters);
         layoutChapters = findViewById(R.id.layoutChapters);
         btnRead = findViewById(R.id.btnRead);
         btnFavorite = findViewById(R.id.btnFavorite);
-        btnBackToHome = findViewById(R.id.btnBackToHome);
         ratingBarInput = findViewById(R.id.ratingBarInput);
+        MaterialToolbar topAppBar = findViewById(R.id.topAppBarLibrary);
+
+        layoutRatingSummary = findViewById(R.id.layoutRatingSummary);
+        LinearLayout layoutComments = findViewById(R.id.layoutComments);
+
+        layoutRatingSummary.setOnClickListener(v -> {
+            if (layoutComments.getVisibility() == View.VISIBLE) {
+                layoutComments.setVisibility(View.GONE);     // ẨN
+            } else {
+                layoutComments.setVisibility(View.VISIBLE);  // HIỆN
+            }
+        });
+
+        topAppBar.setNavigationOnClickListener(v -> {
+            finish(); // quay lại Activity trước
+        });
+
+        Button btnWriteReview = findViewById(R.id.btnWriteReview);
+        LinearLayout layoutWriteReview = findViewById(R.id.layoutWriteReview);
+
+        btnWriteReview.setOnClickListener(v -> {
+            if (layoutWriteReview.getVisibility() == View.VISIBLE) {
+                layoutWriteReview.setVisibility(View.GONE);
+            } else {
+                layoutWriteReview.setVisibility(View.VISIBLE);
+            }
+        });
+
+
 
 
         bookId = getIntent().getStringExtra("BOOK_ID");
@@ -155,10 +186,6 @@ public class BookDetailActivity extends AppCompatActivity {
         tvExpandComments = findViewById(R.id.tvExpandComments);
         tvExpandComments.setOnClickListener(v -> toggleCommentList());
         Log.d("EDIT_COMMENT", "TEST LOG IN onCreate");
-
-        btnBackToHome.setOnClickListener(v -> {
-            finish();
-        });
 
         btnToggleChapters = findViewById(R.id.btnToggleChapters);
 
@@ -554,5 +581,7 @@ private void showEditDialog(Comment comment) {
 
         socket.disconnect();
     }
+
+
 
 }
