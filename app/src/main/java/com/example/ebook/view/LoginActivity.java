@@ -56,7 +56,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     String userId = response.body().getUser().getId();
                     Log.d("SESSION", "Received userId = " + userId);
+                    // Lưu access token và refresh token
                     session.saveToken(response.body().getAccessToken());
+                    if (response.body().getRefreshToken() != null) {
+                        session.saveRefreshToken(response.body().getRefreshToken());
+                    }
                     session.saveUsername(response.body().getUser().getName());
                     session.saveUserId(response.body().getUser().getId());
                     session.saveRole(response.body().getUser().getRole());

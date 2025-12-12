@@ -5,6 +5,7 @@ import com.example.ebook.model.ChangePasswordRequest;
 import com.example.ebook.model.LoginRequest;
 import com.example.ebook.model.RegisterRequest;
 import com.example.ebook.model.LoginResponse;
+import com.example.ebook.model.RefreshTokenRequest;
 import com.example.ebook.model.User;
 import com.example.ebook.model.UserResponse;
 import com.example.ebook.model.UserResponseList;
@@ -45,4 +46,7 @@ public interface AuthApi {
             @Part("gender") RequestBody gender,
             @Part("dateOfBirth") RequestBody dob
     );
+
+    @POST("auth/refresh-token")
+    Call<LoginResponse> refreshToken(@Body RefreshTokenRequest request);
 }

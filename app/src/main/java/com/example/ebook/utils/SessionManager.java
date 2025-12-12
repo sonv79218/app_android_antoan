@@ -83,5 +83,23 @@ public class SessionManager {
         return prefs.getString("ROLE", "");
     }
 
+    public void saveRefreshToken(String refreshToken) {
+        editor.putString("REFRESH_TOKEN", refreshToken);
+        editor.apply();
+    }
+
+    public String getRefreshToken() {
+        return prefs.getString("REFRESH_TOKEN", null);
+    }
+
+    public boolean isLoggedIn() {
+        String token = getToken();
+        return token != null && !token.isEmpty();
+    }
+
+    public void clearSession() {
+        editor.clear();
+        editor.apply();
+    }
 
 }
