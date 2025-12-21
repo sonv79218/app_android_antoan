@@ -6,9 +6,11 @@ import com.example.ebook.model.LoginRequest;
 import com.example.ebook.model.RegisterRequest;
 import com.example.ebook.model.LoginResponse;
 import com.example.ebook.model.RefreshTokenRequest;
-import com.example.ebook.model.User;
+import com.example.ebook.model.VerifyOtpRequest;
+import com.example.ebook.model.ResetPasswordRequest;
 import com.example.ebook.model.UserResponse;
 import com.example.ebook.model.UserResponseList;
+import com.example.ebook.model.ForgotPasswordRequest;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -29,6 +31,15 @@ public interface AuthApi {
 
     @POST("auth/register")
     Call<Void> register(@Body RegisterRequest request);
+
+    @POST("auth/forgot-password")
+    Call<Void> forgotPassword(@Body ForgotPasswordRequest request);
+
+    @POST("auth/verify-otp")
+    Call<Void> verifyOtp(@Body VerifyOtpRequest request);
+
+    @POST("auth/reset-password")
+    Call<Void> resetPassword(@Body ResetPasswordRequest request);
 
     @PATCH("auth/change-password")
     Call<Void> changePassword(@Body ChangePasswordRequest request, @Header("Authorization") String token);

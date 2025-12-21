@@ -34,6 +34,15 @@ public class LoginActivity extends AppCompatActivity {
         Button btnLogin = findViewById(R.id.button3);
         TextView tvToRegister = findViewById(R.id.textViewNewUser);
 
+        // 1. Ánh xạ TextView Quên mật khẩu
+        TextView tvForgotPassword = findViewById(R.id.textViewForgotPassword);
+
+        // 2. Xử lý sự kiện click chuyển trang
+        tvForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
+
         btnLogin.setOnClickListener(v -> doLogin());
         tvToRegister.setOnClickListener(v ->
                 startActivity(new Intent(this, RegisterActivity.class))

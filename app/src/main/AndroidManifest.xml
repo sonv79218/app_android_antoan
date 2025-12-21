@@ -44,6 +44,9 @@
         <activity android:name=".view.FavoriteActivity"/>
         <activity android:name=".view.ReportActivity"/>
         <activity android:name=".view.ChatActivity"/>
+        <activity android:name=".view.ForgotPasswordActivity" />
+        <activity android:name=".view.OTPVerificationActivity" />
+        <activity android:name=".view.ChangePassword2Activity" />
 
     </application>
 
