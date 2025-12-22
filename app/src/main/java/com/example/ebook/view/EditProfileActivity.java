@@ -132,6 +132,24 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
 
+    private boolean isValidName(String name) {
+        return name.matches("^[a-zA-ZÀ-ỹ\\s]{2,50}$");
+    }
+
+    private boolean isValidPhone(String phone) {
+        return phone.matches("^[0-9]{9,11}$");
+    }
+
+    private boolean isValidDate(String date) {
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            sdf.setLenient(false);
+            java.util.Date dob = sdf.parse(date);
+            return dob.before(new java.util.Date()); // không được là tương lai
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 
     private void showDatePicker() {
@@ -169,6 +187,26 @@ public class EditProfileActivity extends AppCompatActivity {
         String phone = etPhone.getText().toString().trim();
         String dob = etDob.getText().toString().trim();
         String gender = rgGender.getCheckedRadioButtonId() == R.id.rbMale ? "nam" : "nu";
+
+        // ✅ VALIDATE TRƯỚC KHI GỬI
+        if (name.isEmpty()) {
+            etName.setError("Tên không được để trống");
+            return;
+        }
+        if (!isValidName(name)) {
+            etName.setError("Tên chỉ gồm chữ, 2–50 ký tự");
+            return;
+        }
+
+        if (!phone.isEmpty() && !isValidPhone(phone)) {
+            etPhone.setError("Số điện thoại phải 9–11 chữ số");
+            return;
+        }
+
+        if (!dob.isEmpty() && !isValidDate(dob)) {
+            etDob.setError("Ngày sinh không hợp lệ");
+            return;
+        }
 
         RequestBody namePart = RequestBody.create(MediaType.parse("text/plain"), name);
         RequestBody phonePart = RequestBody.create(MediaType.parse("text/plain"), phone);

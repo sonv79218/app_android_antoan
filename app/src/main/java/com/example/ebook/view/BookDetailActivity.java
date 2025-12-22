@@ -455,13 +455,40 @@ private void submitComment() {
 
     commentApi.createComment(req).enqueue(new Callback<SingleCommentResponse>() {
         @Override
-        public void onResponse(Call<SingleCommentResponse> call, Response<SingleCommentResponse> res) {
-            if (res.isSuccessful() && res.body().isSuccess()) {
+        public void onResponse(Call<SingleCommentResponse> call,
+                               Response<SingleCommentResponse> res) {
+
+            if (res.isSuccessful() && res.body() != null && res.body().isSuccess()) {
                 edtComment.setText("");
                 ratingBarInput.setRating(0f);
                 loadComments();
+                return;
+            }
+
+            // ❌ Không thành công
+            if (res.code() == 429) {
+                try {
+                    String errorJson = res.errorBody().string();
+                    org.json.JSONObject obj = new org.json.JSONObject(errorJson);
+                    String message = obj.optString(
+                            "message",
+                            "Bạn gửi bình luận quá nhanh. Vui lòng thử lại sau."
+                    );
+
+                    Toast.makeText(BookDetailActivity.this, message, Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(
+                            BookDetailActivity.this,
+                            "Bạn gửi bình luận quá nhanh. Vui lòng thử lại sau.",
+                            Toast.LENGTH_LONG
+                    ).show();
+                }
             } else {
-                Toast.makeText(BookDetailActivity.this, "Lỗi khi gửi bình luận", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        BookDetailActivity.this,
+                        "Lỗi khi gửi bình luận",
+                        Toast.LENGTH_SHORT
+                ).show();
             }
         }
 

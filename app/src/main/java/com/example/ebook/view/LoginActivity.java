@@ -80,10 +80,24 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    if (response.code() == 403) {
-                        Toast.makeText(LoginActivity.this, "Tài khoản đã bị khóa. Vui lòng liên hệ quản trị viên.", Toast.LENGTH_LONG).show();
+                    if (response.code() == 429) {
+                        Toast.makeText(
+                                LoginActivity.this,
+                                "Bạn đăng nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút.",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    } else if (response.code() == 403) {
+                        Toast.makeText(
+                                LoginActivity.this,
+                                "Tài khoản đã bị khóa.",
+                                Toast.LENGTH_LONG
+                        ).show();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Sai email hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                                LoginActivity.this,
+                                "Sai email hoặc mật khẩu",
+                                Toast.LENGTH_SHORT
+                        ).show();
                     }
                 }
             }
