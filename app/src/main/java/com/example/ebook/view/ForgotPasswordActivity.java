@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ebook.R;
 import com.example.ebook.model.ForgotPasswordRequest;
 import com.example.ebook.repository.AuthRepository;
+import org.json.JSONObject; // Thêm thư viện này
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,12 +25,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         repository = new AuthRepository();
-        etEmail = findViewById(R.id.edtEmailForgot); // Đảm bảo ID này đúng trong XML
+        etEmail = findViewById(R.id.edtEmailForgot);
         Button btnSend = findViewById(R.id.btnSendRequest);
         TextView tvBack = findViewById(R.id.tvBackToLogin);
 
         btnSend.setOnClickListener(v -> doCheckEmail());
-
         tvBack.setOnClickListener(v -> finish());
     }
 
@@ -43,24 +43,31 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         ForgotPasswordRequest request = new ForgotPasswordRequest(email);
 
-        // Gọi API kiểm tra email
         repository.forgotPassword(request).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    // Thành công: Email tồn tại, Server đã gửi mã OTP
                     Toast.makeText(ForgotPasswordActivity.this, "Mã OTP đã được gửi!", Toast.LENGTH_SHORT).show();
-
-                    // Chuyển sang trang nhập OTP
                     Intent intent = new Intent(ForgotPasswordActivity.this, OTPVerificationActivity.class);
-                    intent.putExtra("email", email); // Gửi email sang để các bước sau dùng
+                    intent.putExtra("email", email);
                     startActivity(intent);
                 } else {
-                    // Thất bại: Check mã lỗi từ Server
-                    if (response.code() == 404) {
-                        Toast.makeText(ForgotPasswordActivity.this, "Email không tồn tại trên hệ thống!", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(ForgotPasswordActivity.this, "Lỗi: " + response.message(), Toast.LENGTH_SHORT).show();
+                    try {
+                        // Đọc thông báo lỗi chi tiết từ Server
+                        String errorBody = response.errorBody().string();
+                        JSONObject jObjError = new JSONObject(errorBody);
+                        String serverMessage = jObjError.getString("message");
+
+                        if (response.code() == 404) {
+                            Toast.makeText(ForgotPasswordActivity.this, "Email không tồn tại!", Toast.LENGTH_LONG).show();
+                        } else if (response.code() == 403) {
+                            // Hiển thị thông báo khóa: "Tài khoản đang bị khóa. Thử lại sau X phút"
+                            Toast.makeText(ForgotPasswordActivity.this, serverMessage, Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(ForgotPasswordActivity.this, serverMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(ForgotPasswordActivity.this, "Có lỗi xảy ra, vui lòng thử lại", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

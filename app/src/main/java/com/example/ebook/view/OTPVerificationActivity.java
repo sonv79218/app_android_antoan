@@ -10,15 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ebook.R;
 import com.example.ebook.model.VerifyOtpRequest;
 import com.example.ebook.api.AuthApi;
-import com.example.ebook.model.ResetPasswordRequest;
 import android.util.Log;
 import com.example.ebook.api.ApiClient;
 
+import org.json.JSONObject; // Cần thiết để bóc tách JSON lỗi
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class OTPVerificationActivity extends AppCompatActivity {
 
@@ -31,12 +30,10 @@ public class OTPVerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp_verification); // Thay bằng tên file xml của bạn
+        setContentView(R.layout.activity_otp_verification);
 
-        // 1. Lấy email từ Intent gửi sang
         email = getIntent().getStringExtra("email");
 
-        // 2. Ánh xạ view
         edtOTPCode = findViewById(R.id.edtOTPCode);
         btnVerifyOTP = findViewById(R.id.btnVerifyOTP);
         tvDescriptionOTP = findViewById(R.id.tvDescriptionOTP);
@@ -46,10 +43,8 @@ public class OTPVerificationActivity extends AppCompatActivity {
             tvDescriptionOTP.setText("Mã xác thực đã được gửi đến:\n" + email);
         }
 
-        // Khởi tạo API (Giả sử bạn đã có lớp RetrofitClient)
         authApi = ApiClient.getClient().create(AuthApi.class);
 
-        // 3. Xử lý sự kiện nút Xác thực
         btnVerifyOTP.setOnClickListener(v -> {
             String otp = edtOTPCode.getText().toString().trim();
             if (otp.length() < 6) {
@@ -59,9 +54,8 @@ public class OTPVerificationActivity extends AppCompatActivity {
             }
         });
 
-        // 4. Xử lý gửi lại mã (Nếu cần)
         tvResendOTP.setOnClickListener(v -> {
-            // Gọi lại API forgotPassword tại đây để gửi lại mã
+            // Bạn có thể thêm logic gọi authApi.forgotPassword tại đây nếu muốn gửi lại mã
             Toast.makeText(this, "Đang gửi lại mã...", Toast.LENGTH_SHORT).show();
         });
     }
@@ -74,15 +68,25 @@ public class OTPVerificationActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(OTPVerificationActivity.this, "Xác thực thành công!", Toast.LENGTH_SHORT).show();
-
-                    // Chuyển sang màn hình Reset Password
                     Intent intent = new Intent(OTPVerificationActivity.this, ChangePassword2Activity.class);
                     intent.putExtra("email", email);
                     startActivity(intent);
                     finish();
                 } else {
-                    // Thường là lỗi 400 do sai OTP
-                    Toast.makeText(OTPVerificationActivity.this, "Mã OTP không đúng", Toast.LENGTH_SHORT).show();
+                    // XỬ LÝ LỖI TỪ SERVER TRẢ VỀ
+                    try {
+                        // Bóc tách JSON từ errorBody (Ví dụ: {"message": "..."})
+                        String errorBody = response.errorBody().string();
+                        JSONObject jObjError = new JSONObject(errorBody);
+                        String message = jObjError.getString("message");
+
+                        // Hiển thị message trực tiếp từ server (đã bao gồm số lần còn lại hoặc thông báo khóa)
+                        Toast.makeText(OTPVerificationActivity.this, message, Toast.LENGTH_LONG).show();
+
+                    } catch (Exception e) {
+                        // Phòng hờ nếu server trả về lỗi không phải định dạng JSON
+                        Toast.makeText(OTPVerificationActivity.this, "Mã OTP không chính xác hoặc đã hết hạn", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
